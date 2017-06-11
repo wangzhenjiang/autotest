@@ -67,18 +67,14 @@ public class HttpUtil {
             headers.forEach((K, V) -> httpGet.setHeader(K, V));
         }
         HttpResponse httpResponse = httpClient.execute(httpGet);
-
+        //将cookie保存到cookieStore中，以备下一次请求使用
+        saveCookies(cookieStore, httpResponse);
+        //TODO#####################测试代码#################
         System.out.println("Response Status: " + httpResponse.getStatusLine());
-//        Header[] resHeaders = httpResponse.getAllHeaders();
+        // Header[] resHeaders = httpResponse.getAllHeaders();
         Header[] cookieHeaders = httpResponse.getHeaders("Set-Cookie");
         System.out.println("Response Headers: " + Arrays.toString(cookieHeaders));
-        if (cookieHeaders != null && cookieHeaders.length > 0) {
-            Arrays.stream(cookieHeaders).forEach(header -> {
-                String targetCookieStr = header.getValue().split(";")[0];
-                String[] targetCookieArray = targetCookieStr.split("=", 2);
-                cookieStore.addCookie(new BasicClientCookie(targetCookieArray[0], targetCookieArray[1]));
-            });
-        }
+        //TODO#####################测试代码#################
         return EntityUtils.toString(httpResponse.getEntity(), "utf-8");
     }
 
@@ -105,15 +101,31 @@ public class HttpUtil {
 //        httpPost.setConfig(requestConfig);
 //        httpClient.getParams().setParameter("http.useragent", "Custom Browser");
 //        httpClient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
-
         HttpResponse httpResponse = httpClient.execute(httpPost);
+        saveCookies(cookieStore, httpResponse);
+        //TODO#####################测试代码#################
         System.out.println("Response Status: " + httpResponse.getStatusLine());
-        Header[] resHeaders = httpResponse.getAllHeaders();
-        System.out.println("Response Headers: " + Arrays.toString(resHeaders));
+        // Header[] resHeaders = httpResponse.getAllHeaders();
+        Header[] cookieHeaders = httpResponse.getHeaders("Set-Cookie");
+        System.out.println("Response Headers: " + Arrays.toString(cookieHeaders));
+        //TODO#####################测试代码#################
         String response = EntityUtils.toString(httpResponse.getEntity(), "utf-8");
         EntityUtils.consume(httpResponse.getEntity());
         return response;
     }
+
+    private static void saveCookies(CookieStore cookieStore, HttpResponse httpResponse) {
+        Header[] cookieHeaders = httpResponse.getHeaders("Set-Cookie");
+        if (cookieHeaders != null && cookieHeaders.length > 0) {
+            Arrays.stream(cookieHeaders).forEach(header -> {
+                String targetCookieStr = header.getValue().split(";")[0];
+                String[] targetCookieArray = targetCookieStr.split("=", 2);
+                System.out.println("targetCookieArray: " + Arrays.toString(targetCookieArray));
+                cookieStore.addCookie(new BasicClientCookie(targetCookieArray[0], targetCookieArray[1]));
+            });
+        }
+    }
+
 
     public static CloseableHttpClient getHttpClient() {
         return HttpClients.custom()
