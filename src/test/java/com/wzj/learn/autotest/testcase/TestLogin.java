@@ -1,12 +1,11 @@
 package com.wzj.learn.autotest.testcase;
 
-import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.wzj.learn.autotest.utils.HttpUtil;
-import org.apache.http.Header;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.CookieStore;
 import org.apache.http.impl.client.BasicCookieStore;
-import org.junit.Test;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -18,7 +17,7 @@ import java.util.Map;
  */
 public class TestLogin {
 
-    @org.testng.annotations.Test
+    @Test
     public void testLoginJD() throws IOException {
 
         String url = "https://passport.jd.com/uc/loginService?uuid=ff75c8a6-9692-421a-8e84-738fded1a622&ReturnUrl=https%3A%2F%2Fwww.jd.com%2F&r=0.26373833994048623&version=2015";
@@ -47,19 +46,20 @@ public class TestLogin {
         CookieStore cookieStore = new BasicCookieStore();
         String response = HttpUtil.doPost(url, params, headers, cookieStore);
         System.out.println(response);
-
+        Reporter.log(response);
     }
 
     @Test
     public void testRes() throws IOException {
-        String url = "https://passport.jd.com/new/login.aspx?ReturnUrl=https%3A%2F%2Fwww.jd.com%2F";
-        CookieStore cookieStore = new BasicCookieStore();
-        String response = HttpUtil.doGet(url, cookieStore);
+//        String url = "https://passport.jd.com/new/login.aspx?ReturnUrl=https%3A%2F%2Fwww.jd.com%2F";
+//        CookieStore cookieStore = new BasicCookieStore();
+//        String response = HttpUtil.doGet(url, cookieStore);
 //        System.out.println(response);
+        Assert.assertTrue(false);
 
     }
 
-    @Test
+    //    @Test
     public void testSplit() {
         String a = "aete=sdfasdf=sdf2=";
         System.out.println(Arrays.toString(a.split("=", 2)));

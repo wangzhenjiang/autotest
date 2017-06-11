@@ -8,3 +8,5 @@ target
 *.war
 *.swp
 config_center_client.log
+test-output/
+testng-xslt/
