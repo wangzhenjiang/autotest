@@ -2,7 +2,8 @@
 <suite name="Suite1" verbose="2" >
     <test name="Nopackage" >
         <classes>
-            <class name="com.wzj.learn.autotest.testcase.TestLogin" />
+            <!--<class name="com.wzj.learn.autotest.testcase.TestLogin" />-->
+            <class name="com.wzj.learn.autotest.testcase.TestTableMapperTest"/>
         </classes>
     </test>
 </suite>

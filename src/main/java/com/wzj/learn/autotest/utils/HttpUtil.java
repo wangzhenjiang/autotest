@@ -34,8 +34,6 @@ import java.util.Map;
 
 /**
  * Http 工具类
- * <p>
- * Created by wangzhenjiang on 6/10/17.
  */
 public class HttpUtil {
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<setting name="defaultStatementTimeout" value="15" />
+        <!--<setting name="logImpl" value="STDOUT_LOGGING"/>-->
+        <setting name="logImpl" value="SLF4J"/>  <!--指定使用slf4j日志框架-->
+        <setting name="logPrefix" value="org.mybatis.sql."/>
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="com.wzj.learn.autotest.domain.TestTableDO" alias="TestTableDO"/>
+		<typeAlias type="com.wzj.learn.autotest.domain.TestTableQuery" alias="TestTableQuery"/>
+	</typeAliases>
+
+</configuration>

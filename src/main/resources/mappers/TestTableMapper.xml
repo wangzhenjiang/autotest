@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzj.learn.autotest.mapper.TestTableMapper">
+    <!-- doctor 所有查询列 -->
+    <sql id="QUERY_COLUMN_LIST">
+        <![CDATA[
+			id AS id
+			,name AS name
+			,type AS type
+		    ,markup AS markup
+		    ,status AS status
+		    ,gmt_create AS gmtCreate
+			,gmt_modified AS gmtModified
+		]]>
+    </sql>
+
+    <sql id="QUERY_CONDITION">
+        <if test="testTableQuery.name != null">
+            <![CDATA[and name LIKE  CONCAT('%',#{testTableQuery.name},'%')]]>
+        </if>
+        <if test="testTableQuery.type != null">
+            <![CDATA[and type = #{testTableQuery.type}]]>
+        </if>
+        <if test="testTableQuery.status != null">
+            <![CDATA[and status = #{testTableQuery.status}]]>
+        </if>
+    </sql>
+
+    <select id="getById" parameterType="Long" resultType="TestTableDO">
+        SELECT <include refid="QUERY_COLUMN_LIST"/>
+          FROM test_table
+        WHERE id=#{id}
+    </select>
+
+    <select id="countTestTable" parameterType="TestTableQuery" resultType="Integer">
+        SELECT count(*)
+          FROM test_table
+        WHERE 1=1
+         <include refid="QUERY_CONDITION"/>
+    </select>
+
+    <select id="listTestTable" parameterType="TestTableQuery" resultType="TestTableDO">
+        SELECT <include refid="QUERY_COLUMN_LIST"/>
+        FROM test_table
+        WHERE 1=1
+        <include refid="QUERY_CONDITION"/>
+    </select>
+
+    <select id="listTestTableForPage" parameterType="Map" resultType="TestTableDO">
+        SELECT <include refid="QUERY_COLUMN_LIST"/>
+          FROM test_table
+        WHERE 1=1
+        <include refid="QUERY_CONDITION"/>
+        LIMIT #{offset},#{limit}
+    </select>
+
+
+    <update id="update" parameterType="TestTableDO" >
+        UPDATE test_table
+        SET
+        gmt_modified = now()
+        <if test="name != null"><![CDATA[,name = #{name}]]></if>
+        <if test="type != null"><![CDATA[,type = #{type}]]></if>
+        <if test="markup != null"><![CDATA[,markup = #{markup}]]></if>
+        <if test="status != null"><![CDATA[,status = #{status}]]></if>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteById" parameterType="Long">
+        DELETE FROM test_table WHERE id=#{id}
+    </delete>
+
+    <insert id="save" parameterType="TestTableDO"  useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[
+			INSERT INTO test_table (
+				 name
+				,type
+				,markup
+				,status
+				,gmt_create
+				,gmt_modified
+			)
+			VALUES (
+				 #{name}
+				,#{type}
+				,#{markup}
+				,#{status}
+				,now()
+				,now()
+			)
+		]]>
+    </insert>
+</mapper>
+
+
+
