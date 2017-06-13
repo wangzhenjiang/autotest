@@ -8,6 +8,7 @@ import org.testng.Reporter;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,5 +64,16 @@ public class TestLogin {
     public void testSplit() {
         String a = "aete=sdfasdf=sdf2=";
         System.out.println(Arrays.toString(a.split("=", 2)));
+    }
+
+    @org.junit.Test
+    public void postJson() throws IOException {
+        String url = "https://www.baidu.com";
+        String json = "{\"abce\":\"ddev\"}";
+
+        byte[] reqBuffer = json.getBytes(Charset.forName("UTF-8"));
+        byte[] respBuffer = HttpUtil.doPost(url, reqBuffer, "application/octet-stream");
+        String resp = new String(respBuffer, Charset.forName("UTF-8"));
+        System.out.println(resp);
     }
 }
