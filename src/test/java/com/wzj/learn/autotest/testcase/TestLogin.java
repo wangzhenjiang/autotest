@@ -72,7 +72,7 @@ public class TestLogin {
         String json = "{\"abce\":\"ddev\"}";
 
         byte[] reqBuffer = json.getBytes(Charset.forName("UTF-8"));
-        byte[] respBuffer = HttpUtil.doPost(url, reqBuffer, "application/octet-stream");
+        byte[] respBuffer = HttpUtil.doPost(url, reqBuffer, "application/json");
         String resp = new String(respBuffer, Charset.forName("UTF-8"));
         System.out.println(resp);
     }
