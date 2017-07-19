@@ -5,10 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-/**
- * chromedriver: https://chromedriver.storage.googleapis.com/index.html?path=2.30/
- */
-public class ChromeDriverTest extends AbstractCustomTestCase {
+public class FireFoxDriverTest extends AbstractCustomTestCase {
 
     @Test
     public void testGoogleSearch() {
@@ -26,5 +23,4 @@ public class ChromeDriverTest extends AbstractCustomTestCase {
         System.out.println("====> " + element.getAttribute("title"));
         System.out.println(webDriver.getTitle());
     }
-
 }

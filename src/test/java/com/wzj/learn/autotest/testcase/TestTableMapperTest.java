@@ -1,10 +1,8 @@
 package com.wzj.learn.autotest.testcase;
 
 
-import com.alibaba.druid.pool.DruidDataSource;
 import com.wzj.learn.autotest.domain.TestTableDO;
 import com.wzj.learn.autotest.mapper.TestTableMapper;
-import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
@@ -15,7 +13,6 @@ import org.testng.annotations.Test;
 
 import java.util.Date;
 
-//@Transactional()
 @ContextConfiguration(locations = "classpath:spring-config-dao-test.xml")
 public class TestTableMapperTest extends AbstractTransactionalTestNGSpringContextTests {
 
@@ -40,9 +37,6 @@ public class TestTableMapperTest extends AbstractTransactionalTestNGSpringContex
         System.out.println("Id: " + id);
         Assert.assertNotNull(id);
     }
-
-
-
 }
 
 

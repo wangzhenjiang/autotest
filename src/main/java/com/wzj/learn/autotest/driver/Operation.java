@@ -2,9 +2,6 @@ package com.wzj.learn.autotest.driver;
 
 import org.openqa.selenium.By;
 
-/**
- * Created by wangzhenjiang on 2017/7/19.
- */
 public interface Operation {
 
     boolean isWebElementExist(By selector);

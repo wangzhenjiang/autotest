@@ -2,10 +2,7 @@ package com.wzj.learn.autotest.constants;
 
 import org.apache.commons.lang3.StringUtils;
 
-/**
- * Created by wangzhenjiang on 2017/7/19.
- */
-public enum DriverType {
+ public enum DriverType {
 
     CHROME, FIREFOX, IE;
 

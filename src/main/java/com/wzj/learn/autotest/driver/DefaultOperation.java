@@ -9,9 +9,6 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by wangzhenjiang on 2017/7/19.
- */
 public class DefaultOperation implements Operation {
 
     private WebDriver webDriver;

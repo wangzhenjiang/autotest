@@ -6,9 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-/**
- * Created by wangzhenjiang on 2017/7/19.
- */
 public class PropertiesUtil {
     private static Properties properties;
 
@@ -27,6 +24,12 @@ public class PropertiesUtil {
         switch (driverType) {
             case CHROME:
                 path = properties.getProperty("driver.path.chrome").trim();
+                break;
+            case FIREFOX:
+                path = properties.getProperty("driver.path.firefox").trim();
+                break;
+            case IE:
+                path = properties.getProperty("driver.path.ie").trim();
                 break;
             default:
                 path = "";

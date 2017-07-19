@@ -10,9 +10,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Created by wangzhenjiang on 2017/7/19.
- */
 public enum ChromeWebDriverHolder {
     INSTANCE {
         private WebDriver singletonChromeWebDriver = getSingletonChromeWebDriver();
