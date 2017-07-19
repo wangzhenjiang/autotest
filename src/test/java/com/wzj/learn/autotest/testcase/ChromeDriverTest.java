@@ -1,60 +1,33 @@
 package com.wzj.learn.autotest.testcase;
 
-import junit.framework.TestCase;
+import com.wzj.learn.autotest.AbstractCustomTestCase;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
- * Created by wangzhenjiang on 2017/7/17.
+ * chromedriver: https://chromedriver.storage.googleapis.com/index.html?path=2.30/
  */
 @RunWith(JUnit4.class)
-public class ChromeDriverTest extends TestCase {
-
-    private static ChromeDriverService service;
-    private WebDriver driver;
-
-    @BeforeClass
-    public static void createAndStartService() throws IOException {
-        service = new ChromeDriverService.Builder()
-                .usingDriverExecutable(new File("D:\\Work\\other\\selenuim\\chromedriver\\2.30\\chromedriver.exe"))
-                .usingAnyFreePort()
-                .build();
-        service.start();
-    }
-
-    @AfterClass
-    public static void createAndStopService() {
-        service.stop();
-    }
-
-    @Before
-    public void createDriver() {
-        driver = new RemoteWebDriver(service.getUrl(),
-                DesiredCapabilities.chrome());
-    }
-
-    @After
-    public void quitDriver() {
-        driver.quit();
-    }
+public class ChromeDriverTest extends AbstractCustomTestCase {
 
     @Test
     public void testGoogleSearch() {
-        driver.get("https://www.baidu.com");
-        WebElement searchBox = driver.findElement(By.name("q"));
-        searchBox.sendKeys("webdriver");
-//        searchBox.quit();
-//        assertEquals("webdriver - Google Search", driver.getTitle());
-        System.out.println(driver.getTitle());
+        webDriver.get("http://www.google.com");
+        WebElement element = webDriver.findElement(By.name("q"));
+        System.out.println("====> " + element.getTagName());
+        System.out.println("====> " + element.getAttribute("title"));
     }
+
+    @Test
+    public void testBaiduSearch() {
+        webDriver.get("https://www.baidu.com");
+        WebElement element = webDriver.findElement(By.name("f"));
+        System.out.println("====> " + element.getTagName());
+        System.out.println("====> " + element.getAttribute("title"));
+        System.out.println(webDriver.getTitle());
+    }
+
 }
