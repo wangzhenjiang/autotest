@@ -8,10 +8,7 @@ import com.wzj.learn.autotest.driver.Operation;
 import com.wzj.learn.autotest.utils.PropertiesUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.service.DriverService;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.*;
 
 public abstract class AbstractCustomTestCase {
 
@@ -32,7 +29,7 @@ public abstract class AbstractCustomTestCase {
         }
     }
 
-    @BeforeMethod
+    @BeforeSuite
     public void initWebDriver() {
         DriverType type = PropertiesUtil.getDriverType();
         switch (type) {
@@ -47,17 +44,18 @@ public abstract class AbstractCustomTestCase {
         }
     }
 
-    @AfterMethod
-    public void quitWebDriver() {
+    //    @AfterSuite
+    protected void quitWebDriver() {
         if (webDriver != null) {
             webDriver.quit();
         }
     }
 
-    @AfterClass
-    public static void stopDriverService() {
+    //    @AfterClass
+    protected static void stopDriverService() {
         if (driverService != null) {
             driverService.stop();
         }
+
     }
 }

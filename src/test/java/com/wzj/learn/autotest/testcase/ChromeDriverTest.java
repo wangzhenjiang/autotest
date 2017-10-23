@@ -16,6 +16,8 @@ public class ChromeDriverTest extends AbstractCustomTestCase {
         WebElement element = webDriver.findElement(By.name("q"));
         System.out.println("====> " + element.getTagName());
         System.out.println("====> " + element.getAttribute("title"));
+//        quitWebDriver();
+//        stopDriverService();
     }
 
     @Test
