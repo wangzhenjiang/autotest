@@ -9,11 +9,11 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 public class TestAutoShopping extends AbstractCustomTestCase {
-    private static final String ERP = "wangzhenjiang3";
-    private static final String ERP_PWD = "Wzjiang&2017";
+    private static final String ERP = "";
+    private static final String ERP_PWD = "";
     private static final String goodsURL =//备件库商品链接
-            "http://insales.360buy.com/productdetail/show?timerand=1508753028881&wareId=773205&cid1=&cid2=&orgId=&priceMin=&priceMax=&status=&specialRateStatus=";
-    private static final String CODE = "AS-347185870";//备件库条码
+            "";
+    private static final String CODE = "";//备件库条码
     private static final boolean skipCodeCheck = true;//跳过备件库条码检查
 
     @Test
@@ -67,8 +67,8 @@ public class TestAutoShopping extends AbstractCustomTestCase {
         WebElement toPayElement = findElement(By.id("topay"));
         executor.executeScript("arguments[0].click()", toPayElement);
         //提交订单
-//        WebElement submitOrderElement = findElement(By.id("sub_topay"));
-//        executor.executeScript("arguments[0].click()", submitOrderElement);
+        WebElement submitOrderElement = findElement(By.id("sub_topay"));
+        executor.executeScript("arguments[0].click()", submitOrderElement);
         System.out.println("------订单提交成功------------- ");
     }
 
