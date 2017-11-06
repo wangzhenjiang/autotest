@@ -19,7 +19,7 @@ public class ClockServiceImpl implements ClockService {
 
     private WebDriver webDriver;
 
-    @PostConstruct
+//    @PostConstruct
     public void initWebDriver() {
         webDriver = driverService.getWebDriver();
         String url = PropertiesUtil.get("erp.url");
@@ -31,7 +31,7 @@ public class ClockServiceImpl implements ClockService {
         loginERP(username, password);
     }
 
-    @PreDestroy
+//    @PreDestroy
     public void quitWebDriver() {
         webDriver.quit();
     }
@@ -39,6 +39,13 @@ public class ClockServiceImpl implements ClockService {
 
     @Override
     public boolean clockIn() {
+        initWebDriver();
+        doClockIn();
+        quitWebDriver();
+        return true;
+    }
+
+    private void doClockIn() {
         try {
             Thread.sleep(RandomUtils.nextInt(600000, 1200000));
         } catch (InterruptedException e) {//ignore
@@ -49,8 +56,6 @@ public class ClockServiceImpl implements ClockService {
         //执行javascript
         JavascriptExecutor executor = (JavascriptExecutor) webDriver;
         executor.executeScript("arguments[0].click()", buttonElement);
-
-        return true;
     }
 
     @Override
