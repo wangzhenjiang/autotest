@@ -1,6 +1,7 @@
 package com.wzj.learn.autotest.testcase;
 
 import com.wzj.learn.autotest.AbstractCustomTestCase;
+import com.wzj.learn.autotest.utils.PropertiesUtil;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -9,12 +10,10 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 public class TestAutoShopping extends AbstractCustomTestCase {
-    private static final String ERP = "";
-    private static final String ERP_PWD = "";
-    private static final String goodsURL =//备件库商品链接
-            "";
     private static final String CODE = "";//备件库条码
     private static final boolean skipCodeCheck = true;//跳过备件库条码检查
+    private static final String goodsURL =//备件库商品链接
+            "";
 
     @Test
     public void autoShoppingHighLevel() {
@@ -73,10 +72,12 @@ public class TestAutoShopping extends AbstractCustomTestCase {
     }
 
     private void toLogin() {
+        String username = PropertiesUtil.get("erp.username");
+        String password = PropertiesUtil.get("erp.password");
         WebElement element = findElement(By.id("username"));
-        element.sendKeys(ERP);
+        element.sendKeys(username);
         element = findElement(By.id("password"));
-        element.sendKeys(ERP_PWD);
+        element.sendKeys(password);
         element = findElement(By.className("formsubmit_btn"));
         element.submit();
     }

@@ -41,4 +41,8 @@ public class PropertiesUtil {
         String type = properties.getProperty("driver.type");
         return DriverType.parse(type);
     }
+
+    public static String get(String key) {
+        return properties.getProperty(key);
+    }
 }

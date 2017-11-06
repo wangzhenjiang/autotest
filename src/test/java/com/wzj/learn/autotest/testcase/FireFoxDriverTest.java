@@ -1,7 +1,7 @@
 package com.wzj.learn.autotest.testcase;
 
 import com.wzj.learn.autotest.AbstractCustomTestCase;
-import com.wzj.learn.autotest.constants.TestConstant;
+import com.wzj.learn.autotest.constants.Constants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -27,7 +27,7 @@ public class FireFoxDriverTest extends AbstractCustomTestCase {
         WebElement element = webDriver.findElement(By.id("su"));//获取搜索一下按钮
         element.click();//触发点击事件
         //等待搜索结果
-        WebDriverWait webDriverWait = new WebDriverWait(webDriver, TestConstant.WAIT_ELEMENT_TO_LOAD);
+        WebDriverWait webDriverWait = new WebDriverWait(webDriver, Constants.WAIT_ELEMENT_TO_LOAD);
         webDriverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@id='1']")));
         //遍历搜索结果
         int i = 1;

@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public enum ChromeWebDriverHolder {
     INSTANCE {
-        private WebDriver singletonChromeWebDriver = getSingletonChromeWebDriver();
+        private WebDriver singletonChromeWebDriver;
         private ChromeDriverService singletonChromeDriverService;
 
         @Override
@@ -29,25 +29,18 @@ public enum ChromeWebDriverHolder {
         }
 
         private WebDriver getChromeWebDriver(boolean isSingleton) {
-            ChromeDriverService service = isSingleton ? getSingletonChromeDriverService() : getNewChromeDriverService();
+            if (!isSingleton || singletonChromeDriverService == null) {
+                singletonChromeDriverService = newChromeDriverService();
+            }
             try {
-                service.start();
+                singletonChromeDriverService.start();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return new RemoteWebDriver(service.getUrl(), DesiredCapabilities.chrome());
+            return new RemoteWebDriver(singletonChromeDriverService.getUrl(), DesiredCapabilities.chrome());
         }
 
-        @Override
-        public ChromeDriverService getSingletonChromeDriverService() {
-            if (singletonChromeDriverService == null) {
-                singletonChromeDriverService = getNewChromeDriverService();
-            }
-            return singletonChromeDriverService;
-        }
-
-        @Override
-        public ChromeDriverService getNewChromeDriverService() {
+        public ChromeDriverService newChromeDriverService() {
             String driverPath = PropertiesUtil.getDriverPath(DriverType.CHROME);
             return new ChromeDriverService.Builder()
                     .usingDriverExecutable(new File(driverPath))
@@ -59,9 +52,5 @@ public enum ChromeWebDriverHolder {
     public abstract WebDriver getNewChromeWebDriver();
 
     public abstract WebDriver getSingletonChromeWebDriver();
-
-    public abstract ChromeDriverService getNewChromeDriverService();
-
-    public abstract ChromeDriverService getSingletonChromeDriverService();
 
 }

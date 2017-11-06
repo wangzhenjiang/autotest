@@ -1,6 +1,6 @@
 package com.wzj.learn.autotest.driver;
 
-import com.wzj.learn.autotest.constants.TestConstant;
+import com.wzj.learn.autotest.constants.Constants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -59,7 +59,7 @@ public class DefaultOperation implements Operation {
     @Override
     public void click(By selector) {
         webDriver.findElement(selector).click();
-        webDriver.manage().timeouts().implicitlyWait(TestConstant.WAIT_ELEMENT_TO_LOAD, TimeUnit.SECONDS);
+        webDriver.manage().timeouts().implicitlyWait(Constants.WAIT_ELEMENT_TO_LOAD, TimeUnit.SECONDS);
     }
 
     @Override
