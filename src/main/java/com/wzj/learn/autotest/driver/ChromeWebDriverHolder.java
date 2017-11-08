@@ -13,31 +13,30 @@ import java.io.IOException;
 public enum ChromeWebDriverHolder {
     INSTANCE {
         private WebDriver singletonChromeWebDriver;
-        private ChromeDriverService singletonChromeDriverService;
+        private ChromeDriverService chromeDriverService;
 
         @Override
         public WebDriver getNewChromeWebDriver() {
-            return getChromeWebDriver(false);
+            return getChromeWebDriver();
         }
 
         @Override
         public WebDriver getSingletonChromeWebDriver() {
             if (singletonChromeWebDriver == null) {
-                singletonChromeWebDriver = getChromeWebDriver(true);
+                singletonChromeWebDriver = getChromeWebDriver();
             }
             return singletonChromeWebDriver;
         }
 
-        private WebDriver getChromeWebDriver(boolean isSingleton) {
-            if (!isSingleton || singletonChromeDriverService == null) {
-                singletonChromeDriverService = newChromeDriverService();
+        private WebDriver getChromeWebDriver() {
+            if (chromeDriverService == null) {
+                chromeDriverService = newChromeDriverService();
             }
             try {
-                singletonChromeDriverService.start();
+                chromeDriverService.start();
             } catch (IOException e) {
-                e.printStackTrace();
             }
-            return new RemoteWebDriver(singletonChromeDriverService.getUrl(), DesiredCapabilities.chrome());
+            return new RemoteWebDriver(chromeDriverService.getUrl(), DesiredCapabilities.chrome());
         }
 
         public ChromeDriverService newChromeDriverService() {

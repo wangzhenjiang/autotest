@@ -10,6 +10,6 @@ public class ChromeDriverServiceImpl implements DriverService {
 
     @Override
     public WebDriver getWebDriver() {
-        return ChromeWebDriverHolder.INSTANCE.getSingletonChromeWebDriver();
+        return ChromeWebDriverHolder.INSTANCE.getNewChromeWebDriver();
     }
 }
