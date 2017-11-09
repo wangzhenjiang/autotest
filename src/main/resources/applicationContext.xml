@@ -12,10 +12,10 @@
     <context:component-scan base-package="com.wzj.learn.autotest.task" />
 
     <task:scheduled-tasks>
-        <!--
+        <!-- 测试配置
         <task:scheduled ref="clockCron" method="cron" cron="0 0/1 * * * ?"/>
         -->
-        <task:scheduled ref="clockCron" method="cron" cron="0 15/21 8,9 * * ?"/>
-        <task:scheduled ref="clockCron" method="cron" cron="0 15/21 21,22  * * ?"/>
+        <task:scheduled ref="clockCron" method="cron" cron="0 25/21 8   * * ?"/>
+        <task:scheduled ref="clockCron" method="cron" cron="0 27/21 21  * * ?"/>
     </task:scheduled-tasks>
 </beans>
