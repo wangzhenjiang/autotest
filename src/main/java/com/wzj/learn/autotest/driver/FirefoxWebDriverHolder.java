@@ -1,5 +1,6 @@
 package com.wzj.learn.autotest.driver;
 
+import com.wzj.learn.autotest.constants.DriverType;
 import com.wzj.learn.autotest.utils.PropertiesUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -16,7 +17,7 @@ public enum FirefoxWebDriverHolder {
 
         @Override
         public WebDriver getNewFirefoxWebDriver() {
-            String path = PropertiesUtil.getDriverPath(PropertiesUtil.getDriverType());
+            String path = PropertiesUtil.getDriverPath(DriverType.FIREFOX);
             System.setProperty("webdriver.gecko.driver",path);
             return new FirefoxDriver();
         }

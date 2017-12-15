@@ -28,6 +28,17 @@ public enum ChromeWebDriverHolder {
             return singletonChromeWebDriver;
         }
 
+        @Override
+        public Boolean quit() {
+            if (singletonChromeWebDriver != null) {
+                singletonChromeWebDriver.quit();
+            }
+            /*if (chromeDriverService != null) {
+                chromeDriverService.stop();
+            }*/
+            return true;
+        }
+
         private WebDriver getChromeWebDriver() {
             if (chromeDriverService == null) {
                 chromeDriverService = newChromeDriverService();
@@ -35,6 +46,7 @@ public enum ChromeWebDriverHolder {
             try {
                 chromeDriverService.start();
             } catch (IOException e) {
+                System.err.println(e.getMessage());
             }
             return new RemoteWebDriver(chromeDriverService.getUrl(), DesiredCapabilities.chrome());
         }
@@ -51,5 +63,7 @@ public enum ChromeWebDriverHolder {
     public abstract WebDriver getNewChromeWebDriver();
 
     public abstract WebDriver getSingletonChromeWebDriver();
+
+    public abstract Boolean quit();
 
 }

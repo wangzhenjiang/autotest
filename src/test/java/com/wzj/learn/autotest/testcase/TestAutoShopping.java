@@ -2,18 +2,21 @@ package com.wzj.learn.autotest.testcase;
 
 import com.wzj.learn.autotest.AbstractCustomTestCase;
 import com.wzj.learn.autotest.utils.PropertiesUtil;
+import org.apache.commons.lang3.RandomUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
+import java.util.Date;
 import java.util.List;
 
 public class TestAutoShopping extends AbstractCustomTestCase {
-    private static final String CODE = "";//备件库条码
-    private static final boolean skipCodeCheck = true;//跳过备件库条码检查
+    private static final String CODE = "PG2017112300013029";//备件库条码
+    private static final boolean skipCodeCheck = false;//跳过备件库条码检查
     private static final String goodsURL =//备件库商品链接
-            "";
+            "http://insales.360buy.com/productdetail/show?timerand=1512121495555&wareId=5255257&cid1=&cid2=&orgId=&priceMin=&priceMax=&status=&specialRateStatus=";
 
     @Test
     public void autoShoppingHighLevel() {
@@ -51,6 +54,36 @@ public class TestAutoShopping extends AbstractCustomTestCase {
         }
     }
 
+    @Test
+    public void shoppingRemind() {
+        String remindURL = "http://insales.360buy.com/third/product/list?cid1=&cid2=&orgId=&priceMin=&priceMax=&skey=&ikey=&specialRate=&pageSize=20&status=-1&pageNo=1&orderBy=sbegindate";
+        webDriver.get(remindURL);
+        toLogin();
+        for (; ; ) {
+            //刷新当前页面
+            webDriver.navigate().refresh();
+            //打开购物车
+            WebElement noGoods = findElement(By.id("no_result_info"));
+            if (noGoods != null) {
+                long millis = RandomUtils.nextLong(300000, 600000);
+                System.out.println("---进入休眠，休眠时间：" + millis + "ms. " + DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+                try {
+                    //随机休眠 5~10 分钟
+                    Thread.sleep(millis);
+                } catch (InterruptedException e) {//ignore
+                }
+                System.out.println("---休眠结束，休眠时间：" + millis + "ms. " + DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+
+                continue;
+            } else {
+                webDriver.get("http://insales.360buy.com/");
+                toLogin();
+                break;
+            }
+        }
+
+    }
+
     private void toShopping(WebElement cartElement) {
         //执行javascript
         JavascriptExecutor executor = (JavascriptExecutor) webDriver;
@@ -80,21 +113,5 @@ public class TestAutoShopping extends AbstractCustomTestCase {
         element.sendKeys(password);
         element = findElement(By.className("formsubmit_btn"));
         element.submit();
-    }
-
-    private WebElement findElement(WebElement ele, By by) {
-        try {
-            return ele.findElement(by);
-        } catch (NoSuchElementException e) {
-            return null;
-        }
-    }
-
-    private WebElement findElement(By by) {
-        try {
-            return webDriver.findElement(by);
-        } catch (NoSuchElementException e) {
-            return null;
-        }
     }
 }

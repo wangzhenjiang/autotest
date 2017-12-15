@@ -4,7 +4,10 @@ import com.wzj.learn.autotest.constants.DriverType;
 import com.wzj.learn.autotest.driver.ChromeWebDriverHolder;
 import com.wzj.learn.autotest.driver.FirefoxWebDriverHolder;
 import com.wzj.learn.autotest.utils.PropertiesUtil;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.*;
 
 public abstract class AbstractCustomTestCase {
@@ -30,6 +33,22 @@ public abstract class AbstractCustomTestCase {
     protected void quitWebDriver() {
         if (webDriver != null) {
             webDriver.quit();
+        }
+    }
+
+    protected WebElement findElement(WebElement ele, By by) {
+        try {
+            return ele.findElement(by);
+        } catch (NoSuchElementException e) {
+            return null;
+        }
+    }
+
+    protected WebElement findElement(By by) {
+        try {
+            return webDriver.findElement(by);
+        } catch (NoSuchElementException e) {
+            return null;
         }
     }
 }

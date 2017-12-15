@@ -10,4 +10,11 @@ public interface DriverService {
      * @return WebDriver
      */
     WebDriver getWebDriver();
+
+    /**
+     * 退出
+     *
+     * @return
+     */
+    Boolean quit();
 }
