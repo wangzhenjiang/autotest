@@ -16,8 +16,8 @@ import java.util.Date;
 @Service("clockService")
 public class ClockServiceImpl implements ClockService {
 
-//    @Resource(name = "chromeDriverService")
-    @Resource(name = "firefoxDriverService")
+    @Resource(name = "chromeDriverService")
+//    @Resource(name = "firefoxDriverService")
     private DriverService driverService;
 
     private WebDriver webDriver;

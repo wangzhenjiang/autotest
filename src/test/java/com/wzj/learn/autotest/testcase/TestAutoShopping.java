@@ -14,9 +14,9 @@ import java.util.List;
 
 public class TestAutoShopping extends AbstractCustomTestCase {
     private static final String CODE = "PG2017112300013029";//备件库条码
-    private static final boolean skipCodeCheck = false;//跳过备件库条码检查
+    private static final boolean skipCodeCheck = true;//跳过备件库条码检查
     private static final String goodsURL =//备件库商品链接
-            "http://insales.360buy.com/productdetail/show?timerand=1512121495555&wareId=5255257&cid1=&cid2=&orgId=&priceMin=&priceMax=&status=&specialRateStatus=";
+            "http://insales.360buy.com/productdetail/show?timerand=1519703941391&wareId=3934353&cid1=&cid2=&orgId=&priceMin=&priceMax=&status=&specialRateStatus=";
 
     @Test
     public void autoShoppingHighLevel() {
@@ -56,7 +56,7 @@ public class TestAutoShopping extends AbstractCustomTestCase {
 
     @Test
     public void shoppingRemind() {
-        String remindURL = "http://insales.360buy.com/third/product/list?cid1=&cid2=&orgId=&priceMin=&priceMax=&skey=&ikey=&specialRate=&pageSize=20&status=-1&pageNo=1&orderBy=sbegindate";
+        String remindURL = "http://insales.360buy.com/productdetail/show?timerand=1514367585678&wareId=4734534&cid1=&cid2=&orgId=&priceMin=&priceMax=&status=&specialRateStatus=";
         webDriver.get(remindURL);
         toLogin();
         for (; ; ) {

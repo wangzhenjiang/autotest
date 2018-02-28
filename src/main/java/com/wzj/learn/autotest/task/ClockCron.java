@@ -10,7 +10,7 @@ import java.util.Date;
 @Service("clockCron")
 public class ClockCron {
 
-    @Resource(name = "clockService")
+    @Resource(name = "customClockService")
     private ClockService clockService;
 
     public void cron() {
