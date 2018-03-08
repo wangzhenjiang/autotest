@@ -70,8 +70,8 @@ public class ClockServiceImpl implements ClockService {
         System.out.println("---进入休眠，休眠时间：" + millis + "ms. " + DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
         try {
             //随机休眠 1~19 分钟
-//            Thread.sleep(millis);
-            Thread.sleep(RandomUtils.nextInt(1000, 2000));
+            Thread.sleep(millis);
+//            Thread.sleep(RandomUtils.nextInt(1000, 2000));
         } catch (InterruptedException e) {//ignore
         }
         System.out.println("---休眠结束，休眠时间：" + millis + "ms. " + DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
