@@ -17,10 +17,10 @@
         -->
         <!-- 工作日 -->
         <task:scheduled ref="clockCron" method="cron" cron="0 9 8 ? * 2-5"/>
-        <task:scheduled ref="clockCron" method="cron" cron="0 11 21 ? * 2-5"/>
+        <task:scheduled ref="clockCron" method="cron" cron="0 11 23 ? * 2-5"/>
 
         <!-- 周末-->
-        <task:scheduled ref="clockCron" method="cron" cron="0 5 9 ? * SAT,SUN"/>
+        <task:scheduled ref="clockCron" method="cron" cron="0 5 10 ? * SAT,SUN"/>
         <task:scheduled ref="clockCron" method="cron" cron="0 3 21 ? * SAT,SUN"/>
 
     </task:scheduled-tasks>

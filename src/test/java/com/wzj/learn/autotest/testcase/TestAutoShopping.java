@@ -16,7 +16,7 @@ public class TestAutoShopping extends AbstractCustomTestCase {
     private static final String CODE = "PG2017112300013029";//备件库条码
     private static final boolean skipCodeCheck = true;//跳过备件库条码检查
     private static final String goodsURL =//备件库商品链接
-            "http://insales.360buy.com/productdetail/show?timerand=1520226807422&wareId=1036162&cid1=&cid2=&orgId=&priceMin=&priceMax=&status=&specialRateStatus=";
+            "http://insales.360buy.com/productdetail/show?timerand=1523357841506&wareId=1938008&cid1=&cid2=&orgId=&priceMin=&priceMax=&status=&specialRateStatus=";
 
     @Test
     public void autoShoppingHighLevel() {
